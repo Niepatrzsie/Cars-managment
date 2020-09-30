@@ -1,0 +1,78 @@
+﻿@model Car
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>List of cars</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Body</th>
+            <th>Engine</th>
+            <th>Options</th>
+            <th>Team</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var c in (IEnumerable<Car>)ViewBag.Cars)
+        {
+            <tr>
+                <td> @c.Brand</td>
+                <td> @c.Model</td>
+                <td> @c.Body</td>
+                <td> @c.Engine</td>
+                <td> @c.Options</td>
+                <td> @c.Team.Name</td>
+                <td>
+                    <form method="put" action="UpdateCar(@c.IdCar,@c)">
+                        <button class="btn">Update</button>
+                    </form>
+                </td>
+                
+            </tr>
+         }
+    
+    </tbody>
+</table>
+<h2> Add Car to list</h2>
+<form method="post" asp-action="Create">
+    
+    <input type="hidden" asp-for="IdCar" />
+    
+    <div class="form-group">
+        <label asp-for="Brand"></label>
+        <input class="form-control" asp-for="Brand" />
+        <span asp-validation-for="Brand"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Model"></label>
+        <input class="form-control" asp-for="Model" />
+        <span asp-validation-for="Model"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Body"></label>
+        <input class="form-control" asp-for="Body" />
+        <span asp-validation-for="Body"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Engine"></label>
+        <input class="form-control" asp-for="Engine" />
+        <span asp-validation-for="Engine"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Options"></label>
+        <input class="form-control" asp-for="Options" />
+        <span asp-validation-for="Options"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="IdTeam"></label>
+        <select asp-for="IdTeam" 
+                class="form-control"
+                asp-items="@(new SelectList(@ViewBag.Teams,"IdTeam","Name"))"></select>
+        <span asp-validation-for="IdTeam"></span>
+    </div>
+    <input type="submit" value="Add" />
+</form>
