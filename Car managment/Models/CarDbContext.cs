@@ -10,7 +10,7 @@ namespace Car_managment.Models
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=db-mssql;Initial Catalog=s17228;Integrated Security=True");
+            optionsBuilder.UseSqlServer("Connection String to Database");
             base.OnConfiguring(optionsBuilder);
         }
         public DbSet<Car> Cars { get; set; }
